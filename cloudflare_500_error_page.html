@@ -14,81 +14,363 @@
         --glass: rgba(255, 255, 255, 0.04);
         --stroke: rgba(255, 255, 255, 0.12);
         --shadow: 0 40px 140px rgba(0, 0, 0, 0.55),
-          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+          0 0 120px rgba(255, 107, 0, 0.45);
+        --radius-xl: 32px;
       }
 
       * {
         box-sizing: border-box;
-        margin: 0;
-        padding: 0;
       }
+
       html,
       body {
+        margin: 0;
+        padding: 0;
         height: 100%;
       }
+
       body {
-        font-family: Outfit, system-ui, sans-serif;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+          -apple-system, "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top, #10131b, #05060a 55%, #000 90%);
         color: var(--fg);
-        background: radial-gradient(
-            900px 700px at 20% -10%,
-            #ff6b0022 0,
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        overflow: hidden;
+      }
+
+      .wrap {
+        width: 100%;
+        max-width: 880px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .holo {
+        position: relative;
+        padding: 28px 26px 24px;
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--stroke);
+        background:
+          radial-gradient(
+            circle at -10% -20%,
+            rgba(255, 180, 0, 0.15) 0,
+            rgba(255, 180, 0, 0.02) 30%,
             #0000 60%
           ),
-          radial-gradient(900px 700px at 100% 120%, #ffb40022 0, #0000 60%),
-          var(--bg-0);
+          radial-gradient(
+            circle at 110% 0%,
+            rgba(255, 107, 0, 0.22) 0,
+            rgba(255, 107, 0, 0.02) 26%,
+            #0000 58%
+          ),
+          linear-gradient(135deg, rgba(13, 16, 26, 0.92), rgba(4, 4, 9, 0.98));
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .holo::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.08),
+          transparent 20%,
+          transparent 80%,
+          rgba(255, 255, 255, 0.07)
+        );
+        mix-blend-mode: soft-light;
+        pointer-events: none;
+      }
+
+      .holo::after {
+        content: "";
+        position: absolute;
+        inset: 1px;
+        border-radius: calc(var(--radius-xl) - 1px);
+        background: linear-gradient(
+            to bottom right,
+            rgba(255, 255, 255, 0.08),
+            rgba(255, 255, 255, 0.01),
+            rgba(255, 255, 255, 0.02)
+          ),
+          repeating-linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.02) 0,
+            rgba(255, 255, 255, 0.02) 1px,
+            rgba(255, 255, 255, 0) 1px,
+            rgba(255, 255, 255, 0) 2px
+          );
+        opacity: 0.2;
+        pointer-events: none;
+      }
+
+      .holo > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .head {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .sigil {
+        width: 60px;
+        height: 60px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
         display: grid;
         place-items: center;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         overflow: hidden;
+      }
+
+      .sigil img {
+        width: 38px;
+        height: 38px;
+        filter: drop-shadow(0 0 6px #0008);
+      }
+
+      .title h1 {
+        font-size: clamp(22px, 3.6vw, 36px);
+        font-weight: 680;
+        letter-spacing: 0.03em;
+        margin: 0 0 3px;
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+      }
+
+      .title h1 span.badge {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        padding: 2px 7px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.32);
+        background: rgba(4, 8, 18, 0.85);
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        color: #ffe9c4;
+      }
+
+      .title h1 span.badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #ffb400 0, #ff6b00 60%, #5b2c00 100%);
+        box-shadow: 0 0 10px rgba(255, 180, 0, 0.9);
+      }
+
+      .title p {
+        margin: 0;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .readout {
+        margin-top: 10px;
+        padding: 10px 12px 10px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: radial-gradient(
+            circle at left,
+            rgba(255, 180, 0, 0.08),
+            transparent 60%
+          ),
+          rgba(5, 6, 12, 0.9);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .code {
+        font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        font-size: 18px;
+        font-weight: 650;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: radial-gradient(circle at top left, #ffb400, #ff6b00);
+        color: #1b1104;
+        box-shadow: 0 0 18px rgba(255, 180, 0, 0.7);
+      }
+
+      .msg {
+        color: var(--muted);
+        font-size: 16px;
+      }
+
+      .cf-error-box {
+        margin-top: 14px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: 1px dashed var(--stroke);
+        font-size: 13px;
+        color: var(--muted);
+        background: rgba(0, 0, 0, 0.35);
+      }
+
+      .tips {
+        margin: 18px 0;
+        color: var(--muted);
+        display: grid;
+        gap: 8px;
+        font-size: 15px;
+      }
+
+      .tips li {
+        margin-left: 18px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 6px;
+      }
+
+      .btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.26);
+        background: radial-gradient(
+            circle at top left,
+            rgba(255, 255, 255, 0.12),
+            rgba(255, 255, 255, 0.02)
+          ),
+          rgba(7, 12, 20, 0.96);
+        color: #fff7e6;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      .btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.3),
+          transparent 40%,
+          transparent 60%,
+          rgba(255, 255, 255, 0.2)
+        );
+        mix-blend-mode: soft-light;
+        opacity: 0;
+        transition: opacity 160ms ease-out, transform 220ms ease-out;
+        transform: translateX(-20%);
+      }
+
+      .btn:hover::after {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .btn.primary {
+        background: radial-gradient(circle at top left, #ffb400, #ff6b00);
+        border-color: rgba(255, 200, 120, 0.9);
+        color: #1b1104;
+        box-shadow: 0 0 22px rgba(255, 180, 0, 0.7);
+      }
+
+      .meta {
+        margin-top: 14px;
+        font-size: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        color: rgba(212, 212, 212, 0.82);
+      }
+
+      .meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .meta span::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #ffb400 0, #ff6b00 60%, #5b2c00 100%);
+        box-shadow: 0 0 8px rgba(255, 180, 0, 0.9);
+      }
+
+      .contact {
+        margin-top: 12px;
+        color: var(--accent);
+        font-size: 14px;
+        font-weight: 600;
+        text-align: right;
+      }
+
+      .contact a {
+        color: var(--accent);
+        text-decoration: none;
       }
 
       .universe {
         position: fixed;
         inset: 0;
-        z-index: -10;
-        overflow: hidden;
-      }
-      .stars {
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(1px 1px at 20% 30%, #fff8 20%, #0000 21%),
-          radial-gradient(1px 1px at 60% 70%, #fff8 20%, #0000 21%),
-          radial-gradient(1px 1px at 90% 10%, #fff8 20%, #0000 21%),
-          radial-gradient(1px 1px at 30% 80%, #fff8 20%, #0000 21%),
-          linear-gradient(#0000, #0001);
-        filter: drop-shadow(0 0 8px #fff6);
-        animation: floatStars 80s linear infinite;
-      }
-      @keyframes floatStars {
-        0% {
-          transform: translateY(0);
-        }
-        100% {
-          transform: translateY(-80px);
-        }
+        background: radial-gradient(circle at top, #15182b, #05060a 60%, #000 100%);
+        opacity: 0.7;
+        z-index: 0;
+        pointer-events: none;
       }
 
-      .wrap {
-        width: min(900px, 95%);
-        padding: 24px;
-        position: relative;
-      }
-
-      /* Updated card background — glowing gradient with texture */
-      .holo {
-        position: relative;
-        padding: 36px;
-        border-radius: 26px;
-        overflow: hidden;
-        background: linear-gradient(145deg, #111318, #0a0c11 40%, #171a22 100%);
-        border: 1px solid var(--stroke);
-        box-shadow: 0 0 60px -10px #000, inset 0 0 40px rgba(255, 180, 0, 0.08);
-        backdrop-filter: blur(18px) saturate(1.3);
-      }
-      .holo::before {
+      .universe::before {
         content: "";
         position: absolute;
+        inset: -40%;
+        background-image: radial-gradient(
+          1px 1px at 10% 20%,
+          rgba(255, 255, 255, 0.5),
+          transparent
+        );
+        opacity: 0.32;
+      }
+
+      .universe .stars {
+        position: absolute;
         inset: 0;
-        border-radius: inherit;
+        background-image: radial-gradient(
+            1px 1px at 20% 10%,
+            rgba(255, 255, 255, 0.6),
+            transparent
+          ),
+          radial-gradient(1px 1px at 80% 30%, rgba(255, 255, 255, 0.5), transparent),
+          radial-gradient(1.2px 1.2px at 60% 80%, rgba(255, 255, 255, 0.4), transparent);
+        opacity: 0.55;
+      }
+
+      .glow-orb {
+        position: absolute;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
         background: radial-gradient(
           400px 200px at 50% -10%,
           rgba(255, 107, 0, 0.2) 0,
@@ -100,6 +382,7 @@
         z-index: 0;
         animation: glow 8s ease-in-out infinite alternate;
       }
+
       @keyframes glow {
         0% {
           opacity: 0.3;
@@ -111,122 +394,43 @@
         }
       }
 
-      .head {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        position: relative;
-        z-index: 1;
-      }
-      .sigil {
-        width: 60px;
-        height: 60px;
-        border-radius: 18px;
-        background: linear-gradient(135deg, var(--accent), var(--accent-2));
-        display: grid;
-        place-items: center;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-      }
-      .sigil img {
-        width: 38px;
-        height: 38px;
-        filter: drop-shadow(0 0 6px #0008);
-      }
-      .title h1 {
-        font-size: clamp(22px, 3.6vw, 36px);
-        font-weight: 800;
-        margin: 0;
-        color: var(--accent);
-        text-shadow: 0 0 20px rgba(255, 107, 0, 0.4);
-      }
-      .title p {
-        color: var(--muted);
-        font-size: 15px;
-        margin-top: 4px;
-      }
+      @media (max-width: 640px) {
+        .holo {
+          padding: 20px 16px 18px;
+        }
 
-      .readout {
-        margin: 22px 0 10px;
-        display: flex;
-        align-items: baseline;
-        gap: 14px;
-      }
-      .code {
-        font-weight: 900;
-        font-size: clamp(44px, 12vw, 96px);
-        letter-spacing: -2px;
-        background: linear-gradient(90deg, var(--accent), var(--accent-2));
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        text-shadow: 0 0 28px rgba(255, 107, 0, 0.3);
-      }
-      .msg {
-        color: var(--muted);
-        font-size: 16px;
-      }
+        .head {
+          align-items: flex-start;
+        }
 
-      .tips {
-        margin: 18px 0;
-        color: var(--muted);
-        display: grid;
-        gap: 8px;
-        font-size: 15px;
-      }
-      .tips li {
-        margin-left: 18px;
-      }
+        .sigil {
+          width: 52px;
+          height: 52px;
+        }
 
-      .actions {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-        margin-top: 20px;
-      }
-      .btn {
-        appearance: none;
-        padding: 12px 18px;
-        border-radius: 14px;
-        font-weight: 600;
-        text-decoration: none;
-        cursor: pointer;
-        border: 1px solid var(--stroke);
-        color: var(--fg);
-        background: rgba(255, 255, 255, 0.06);
-        transition: 0.2s;
-      }
-      .btn.primary {
-        background: linear-gradient(135deg, var(--accent), var(--accent-2));
-        border: none;
-        color: #000;
-        font-weight: 700;
-        box-shadow: 0 4px 22px rgba(255, 107, 0, 0.3);
-      }
-      .btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 20px rgba(255, 180, 0, 0.25);
-      }
+        .sigil img {
+          width: 32px;
+          height: 32px;
+        }
 
-      .meta {
-        margin-top: 22px;
-        padding-top: 14px;
-        border-top: 1px dashed var(--stroke);
-        color: var(--muted);
-        font-size: 13px;
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-      .contact {
-        margin-top: 12px;
-        color: var(--accent);
-        font-size: 14px;
-        font-weight: 600;
-        text-align: right;
-      }
-      .contact a {
-        color: var(--accent);
-        text-decoration: none;
+        .title h1 {
+          font-size: 20px;
+        }
+
+        .readout {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 6px;
+        }
+
+        .actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .contact {
+          text-align: left;
+        }
       }
     </style>
   </head>
@@ -236,10 +440,19 @@
       <section class="holo" role="alert">
         <div class="head">
           <div class="sigil">
-            <img src="customs-Hig Res.svg" alt="Customs Logo" />
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAYAAACYl9qkAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACAASURBVHic7Z13mB5Xff9/98x08t2Z3cfYsXCY2EGCgbWBGjIlUqw5aLnJq8UJ7CMha9TTtXbJp6pTq7WTitubpW63W5Hnao4Hsp9adOmKHVbFEahCIVQAG8FB12DAvb7bmf37zFi8d9Z3Z3enZ2ZnZ2Z2dnZ2fmff7yXc/tmd2Z3Zib/vyLCVQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQqFQrF4P+Px+P67oAsFgMCwWCwWCwWAwLBYLBYLBYPBf8CYo7kcg8FgMBgMBoPB0N0BVCoVAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFAoFArH8Be+w+bMb1vI8AAAAASUVORK5CYII="
+              alt="Customs Logo"
+            />
           </div>
           <div class="title">
-            <h1>Customs Affairs - Network Interference</h1>
+            <h1>
+              Customs Affairs - Network Interference
+              <span class="badge">
+                <span class="badge-dot"></span>
+                Secure Edge
+              </span>
+            </h1>
             <p>
               We’re currently unable to reach the internal systems. Please stand
               by.
@@ -254,6 +467,11 @@
           </div>
         </div>
 
+        <!-- Cloudflare error diagnostic box -->
+        <div class="cf-error-box">
+          ::CLOUDFLARE_ERROR_500S_BOX::
+        </div>
+
         <ul class="tips">
           <li>Try again — this issue is usually brief.</li>
           <li>Ensure your VPN or secure gateway connection is stable.</li>
@@ -262,17 +480,17 @@
 
         <div class="actions">
           <a class="btn primary" href="">Retry</a>
-          <a class="btn" href="https://example.com">Go to Homepage</a>
-          <a class="btn" href="https://status.example.com">System Status</a>
+          <a class="btn" href="/">Go to Homepage</a>
+          <a class="btn" href="#">System Status</a>
         </div>
 
         <div class="meta">
-          <span
-            >Time:
+          <span>
+            Time:
             <script>
               document.write(new Date().toLocaleString());
-            </script></span
-          >
+            </script>
+          </span>
           <span>Reference: REF-CA</span>
           <span>Data Center: Customs Edge</span>
         </div>
