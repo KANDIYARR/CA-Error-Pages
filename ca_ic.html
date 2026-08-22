@@ -1,122 +1,518 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CareersCloud - Checking your browser</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-* { margin:0; padding:0; box-sizing:border-box }
-html{overflow-y:scroll; overflow-x:hidden}
-body {
-  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-  min-height:100vh; min-height:100dvh;
-  background:linear-gradient(135deg,#FFF1F3 0%,#FDE8EB 18%,#EFF4FF 72%,#E6EFFF 100%);
-  display:flex; align-items:flex-start; justify-content:center; padding:32px 24px; position:relative; overflow-x:hidden; overflow-y:visible; color:#1E293B
-}
-::-webkit-scrollbar{width:10px; height:10px}
-::-webkit-scrollbar-track{background:rgba(0,0,0,0.04); border-radius:10px}
-::-webkit-scrollbar-thumb{background:#CBD5E1; border-radius:10px; border:2px solid rgba(255,255,255,0.5)}
-::-webkit-scrollbar-thumb:hover{background:#94A3B8}
-html{scrollbar-width:thin; scrollbar-color:#CBD5E1 transparent}
-body::before{content:'';position:absolute;width:700px;height:700px;left:-120px;top:-160px;background:radial-gradient(ellipse at center,rgba(233,64,87,0.12),transparent 70%);pointer-events:none}
-body::after{content:'';position:absolute;width:800px;height:800px;right:-180px;bottom:-200px;background:radial-gradient(ellipse at center,rgba(58,123,223,0.14),transparent 70%);pointer-events:none}
-.pattern{position:absolute;inset:0;pointer-events:none;opacity:0.06}
-.glass{
-  width:100%; max-width:560px; margin:auto;
-  background:rgba(255,255,255,0.82); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
-  border:1px solid rgba(255,255,255,0.7); border-radius:28px;
-  box-shadow:0 20px 60px -12px rgba(31,41,55,0.14),0 8px 24px -8px rgba(31,41,55,0.08);
-  padding:40px 36px 28px; position:relative; z-index:2
-}
-.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:28px}
-.logo{width:64px;height:64px;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.08))}
-.brand{font-weight:700;letter-spacing:-0.02em;font-size:22px;color:#EA2042}
-.brand span{color:#159FDC}
-.tagline{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#066AC6;font-weight:600;margin-top:-6px}
-.badge{display:inline-flex;align-items:center;gap:8px;background:#EFF6FF;border:1px solid #BFDBFE;color:#1E40AF;font-size:11px;font-weight:700;letter-spacing:0.12em;padding:7px 14px;border-radius:999px;text-transform:uppercase}
-.badge-dot{width:6px;height:6px;border-radius:999px;background:#3B82F6;box-shadow:0 0 0 4px rgba(59,130,246,0.18);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}
-h1{font-size:28px;line-height:1.15;letter-spacing:-0.03em;font-weight:700;color:#0F172A;text-align:center;margin:22px 0 12px}
-p.lead{font-size:15.5px;line-height:1.6;color:#475569;text-align:center;max-width:420px;margin:0 auto 22px}
-.info-box{display:flex;gap:12px;background:#F0F7FF;border:1px solid #BFDBFE;border-radius:14px;padding:14px 16px;margin:0 auto 20px;text-align:left}
-.info-icon{width:36px;height:36px;border-radius:10px;background:#DBEAFE;border:1px solid #BFDBFE;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.info-text{font-size:13px;line-height:1.5;color:#475569}
-.info-text strong{color:#0F172A;display:block;font-size:13px;margin-bottom:2px}
-.managed-box{
-  background:white;border:1px solid #E2E8F0;border-radius:16px;padding:22px;
-  margin:0 auto 22px;display:flex;flex-direction:column;align-items:center;gap:14px;
-  box-shadow:0 8px 24px -8px rgba(31,41,55,0.12), 0 0 0 1px rgba(59,130,246,0.06) inset;
-}
-.managed-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#94A3B8;display:flex;align-items:center;gap:8px}
-.spinner{width:48px;height:48px;border-radius:999px;border:3px solid #DBEAFE;border-top-color:#2563EB;animation:spin 0.9s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.btns{display:flex;gap:12px;justify-content:center;margin:0 0 24px;flex-wrap:wrap}
-.btn{appearance:none;border:0;border-radius:12px;padding:12px 20px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
-.btn-ghost{background:white;border:1px solid #E2E8F0;color:#334155}
-.tokens{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:16px;background:#F8FAFC;border:1px solid #F1F5F9;border-radius:14px;margin-top:4px}
-.token{display:flex;flex-direction:column;gap:4px}
-.token-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#94A3B8}
-.token-value{font-family:ui-monospace,monospace;font-size:12px;font-weight:600;color:#334155;background:white;border:1px solid #E2E8F0;padding:6px 9px;border-radius:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.footer{margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.footer-left{font-size:11px;color:#94A3B8}
-.footer-right{font-size:11px;color:#94A3B8;display:flex;gap:12px}
-@media(max-width:520px){.glass{padding:28px 22px 20px;border-radius:22px}h1{font-size:24px}.tokens{grid-template-columns:1fr}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CareersCloud - Interactive Security Check</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html {
+      overflow-y: scroll;
+      overflow-x: hidden
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      min-height: 100dvh;
+      background: linear-gradient(135deg, #FFF1F3 0%, #FDE8EB 18%, #EFF4FF 72%, #E6EFFF 100%);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 32px 24px;
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: visible;
+      color: #1E293B
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.04);
+      border-radius: 10px
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.5)
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8
+    }
+
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #CBD5E1 transparent
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      left: -120px;
+      top: -160px;
+      background: radial-gradient(ellipse at center, rgba(233, 64, 87, 0.12), transparent 70%);
+      pointer-events: none
+    }
+
+    body::after {
+      content: '';
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      right: -180px;
+      bottom: -200px;
+      background: radial-gradient(ellipse at center, rgba(58, 123, 223, 0.14), transparent 70%);
+      pointer-events: none
+    }
+
+    .pattern {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.06
+    }
+
+    .glass {
+      width: 100%;
+      max-width: 560px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 28px;
+      box-shadow: 0 20px 60px -12px rgba(31, 41, 55, 0.14), 0 8px 24px -8px rgba(31, 41, 55, 0.08);
+      padding: 40px 36px 28px;
+      position: relative;
+      z-index: 2
+    }
+
+    .logo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px
+    }
+
+    .logo {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08))
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: 22px;
+      color: #EA2042
+    }
+
+    .brand span {
+      color: #159FDC
+    }
+
+    .tagline {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #066AC6;
+      font-weight: 600;
+      margin-top: -6px
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      color: #1E40AF;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 7px 14px;
+      border-radius: 999px;
+      text-transform: uppercase
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #3B82F6;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18);
+      animation: pulse 2s infinite
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0.6
+      }
+    }
+
+    h1 {
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+      color: #0F172A;
+      text-align: center;
+      margin: 22px 0 12px
+    }
+
+    p.lead {
+      font-size: 15.5px;
+      line-height: 1.6;
+      color: #475569;
+      text-align: center;
+      max-width: 420px;
+      margin: 0 auto 22px
+    }
+
+    .info-box {
+      display: flex;
+      gap: 12px;
+      background: #F0F7FF;
+      border: 1px solid #BFDBFE;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin: 0 auto 20px;
+      text-align: left
+    }
+
+    .info-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #DBEAFE;
+      border: 1px solid #BFDBFE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0
+    }
+
+    .info-text {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #475569
+    }
+
+    .info-text strong {
+      color: #0F172A;
+      display: block;
+      font-size: 13px;
+      margin-bottom: 2px
+    }
+
+    .challenge-box {
+      background: white;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 22px;
+      margin: 0 auto 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 8px 24px -8px rgba(31, 41, 55, 0.12), 0 0 0 1px rgba(59, 130, 246, 0.06) inset;
+    }
+
+    .challenge-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #94A3B8;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .turnstile-wrap {
+      width: 100%;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .pulse-ring {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      background: #EFF6FF;
+      border: 2px solid #BFDBFE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: ping 1.8s infinite
+    }
+
+    @keyframes ping {
+      0% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4)
+      }
+
+      70% {
+        box-shadow: 0 0 0 12px rgba(59, 130, 246, 0)
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0)
+      }
+    }
+
+    .btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin: 0 0 24px;
+      flex-wrap: wrap
+    }
+
+    .btn {
+      appearance: none;
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .2s
+    }
+
+    .btn-primary {
+      background: #0F172A;
+      color: white;
+      box-shadow: 0 8px 20px -8px rgba(15, 23, 42, 0.5)
+    }
+
+    .btn-ghost {
+      background: white;
+      border: 1px solid #E2E8F0;
+      color: #334155
+    }
+
+    .tokens {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 16px;
+      background: #F8FAFC;
+      border: 1px solid #F1F5F9;
+      border-radius: 14px;
+      margin-top: 4px
+    }
+
+    .token {
+      display: flex;
+      flex-direction: column;
+      gap: 4px
+    }
+
+    .token-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #94A3B8
+    }
+
+    .token-value {
+      font-family: ui-monospace, monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: #334155;
+      background: white;
+      border: 1px solid #E2E8F0;
+      padding: 6px 9px;
+      border-radius: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+    .footer {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .footer-left {
+      font-size: 11px;
+      color: #94A3B8
+    }
+
+    .footer-right {
+      font-size: 11px;
+      color: #94A3B8;
+      display: flex;
+      gap: 12px
+    }
+
+    @media(max-width:520px) {
+      .glass {
+        padding: 28px 22px 20px;
+        border-radius: 22px
+      }
+
+      h1 {
+        font-size: 24px
+      }
+
+      .tokens {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="pattern"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="p" width="120" height="120" patternUnits="userSpaceOnUse"><g opacity="0.7"><path d="M60 20 L66 36 L60 32 L54 36 Z" fill="#0F172A" /><circle cx="60" cy="48" r="2" fill="#0F172A" /></g></pattern></defs><rect width="100%" height="100%" fill="url(#p)" /></svg></div>
-<div class="glass">
-  <div class="logo-wrap">
-    <img src="https://assets.careerscloud.in/Common/images/logo.png" alt="CareersCloud" class="logo" />
-    <div class="brand">Careers<span>Cloud</span></div>
-    <div class="tagline">LEARN TO LEAD</div>
-  </div>
-  <div style="text-align:center">
-    <span class="badge">
-      <span class="badge-dot"></span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="12" r="3"/></svg>
-      Managed Challenge • I'm Under Attack Mode
-    </span>
-  </div>
-  <h1>Checking your browser<br/>before you continue</h1>
-  <p class="lead">This error appears when our servers are unable to complete the request due to a configuration, security, or origin issue with the domain. We are working on it — the issue will be solved shortly. Please wait while we verify your browser.</p>
+  <div class="pattern"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="p" width="120" height="120" patternUnits="userSpaceOnUse">
+          <g opacity="0.7">
+            <path d="M60 20 L66 36 L60 32 L54 36 Z" fill="#0F172A" />
+            <circle cx="60" cy="48" r="2" fill="#0F172A" />
+          </g>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#p)" />
+    </svg></div>
+  <div class="glass">
+    <div class="logo-wrap">
+      <img src="https://assets.careerscloud.in/Common/images/logo.png" alt="CareersCloud" class="logo" />
+      <div class="brand">Careers<span>Cloud</span></div>
+      <div class="tagline">LEARN TO LEAD</div>
+    </div>
+    <div style="text-align:center">
+      <span class="badge">
+        <span class="badge-dot"></span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+        Interactive Challenge • Human Verification
+      </span>
+    </div>
+    <h1>Just checking<br />you're human</h1>
+    <p class="lead">This error appears when our servers are unable to complete the request due to a configuration,
+      security, or origin issue with the domain. Please complete the check below — we are working on it and the issue
+      will be solved shortly.</p>
 
-  <!-- Managed Challenge / IUAM Box - REQUIRED TOKEN FOR IUAM -->
-  <div class="managed-box">
-    <span class="managed-label">
-      <span class="spinner"></span>
-      Cloudflare Managed Challenge — Auto Verifying
-    </span>
-    
-    ::IM_UNDER_ATTACK_BOX::
-    ::CAPTCHA_BOX::
+    <!-- Interactive Challenge Box - REQUIRED -->
+    <div class="challenge-box">
+      <span class="challenge-label">
+        <span class="pulse-ring">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        </span>
+        Cloudflare Interactive Challenge
+      </span>
 
-    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
-      <div style="font-size:13px;font-weight:600;color:#0F172A;">Please wait, you will be redirected in 5 seconds...</div>
-      <div style="font-size:11px;color:#94A3B8;max-width:380px;">If you are not redirected, please complete the check above. Disable ad-blocker if needed. Ray: ::RAY_ID:: • IP: ::CLIENT_IP::</div>
+      <div class="turnstile-wrap">
+        ::CAPTCHA_BOX::
+        <div id="cf-turnstile-placeholder"
+          style="display:flex;flex-direction:column;align-items:center;gap:10px; margin-top:8px;">
+          <div style="display:flex;align-items:center;gap:8px;color:#334155;font-size:14px;font-weight:600;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2"
+              style="animation:spin 1.2s linear infinite">
+              <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+            </svg>
+            Verifying you are human...
+          </div>
+          <div style="font-size:11px;color:#94A3B8;">This may take a few seconds • Ray: ::RAY_ID::</div>
+        </div>
+      </div>
+
+      <div
+        style="display:flex;gap:8px;align-items:center;font-size:11px;color:#94A3B8;text-align:center;max-width:360px;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4" />
+          <path d="M12 8h.01" />
+        </svg>
+        If the challenge doesn't load, disable ad-blocker or try again. Your IP: ::CLIENT_IP::
+      </div>
+    </div>
+
+    <div class="btns">
+      <a href="javascript:location.reload()" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="23 4 23 10 17 10" />
+          <polyline points="1 20 1 14 7 14" />
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10" />
+          <path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14" />
+        </svg>
+        Retry Verification
+      </a>
+      <a href="https://careerscloud.in" class="btn btn-ghost">Homepage</a>
+    </div>
+
+    <!-- ::CLOUDFLARE_ERROR_500S_BOX:: -->
+    <!-- ::CLOUDFLARE_ERROR_1000S_BOX:: -->
+
+    <div class="tokens">
+      <div class="token"><span class="token-label">Ray ID</span><span class="token-value">::RAY_ID::</span></div>
+      <div class="token"><span class="token-label">Your IP</span><span class="token-value">::CLIENT_IP::</span></div>
+      <div class="token"><span class="token-label">Region</span><span class="token-value">::GEO:: • ::COLO::</span>
+      </div>
+      <div class="token"><span class="token-label">Time</span><span class="token-value">2026-08-22 16:58 UTC</span>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer-left">© CareersCloud • Interactive Challenge • 2M+ learners</div>
+      <div class="footer-right"><span style="display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12"
+            viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg> Protected by Cloudflare</span> <a href="/cdn-cgi/trace"
+          style="color:#64748B;text-decoration:underline">Trace</a></div>
     </div>
   </div>
-
-  <div class="btns">
-    <a href="https://careerscloud.in" class="btn btn-ghost">Homepage</a>
-    <a href="/cdn-cgi/trace" class="btn btn-ghost">Trace</a>
-  </div>
-
-  <!-- Required for Cloudflare custom pages -->
-  <!-- ::CLOUDFLARE_ERROR_1000S_BOX:: -->
-  <!-- ::CLOUDFLARE_ERROR_500S_BOX:: -->
-
-  <div class="tokens">
-    <div class="token"><span class="token-label">Ray ID</span><span class="token-value">::RAY_ID::</span></div>
-    <div class="token"><span class="token-label">Your IP</span><span class="token-value">::CLIENT_IP::</span></div>
-    <div class="token"><span class="token-label">Region / Colo</span><span class="token-value">::GEO:: • ::COLO::</span></div>
-    <div class="token"><span class="token-label">Time</span><span class="token-value">2026-08-22 16:58 UTC</span></div>
-  </div>
-  <div class="footer">
-    <div class="footer-left">© CareersCloud • Under Attack Mode • DDoS Protection Active</div>
-    <div class="footer-right"><span style="display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Protected by Cloudflare</span> <span>Managed</span></div>
-  </div>
-</div>
+  <style>
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+  </style>
 </body>
+
 </html>
